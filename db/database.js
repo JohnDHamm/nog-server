@@ -14,5 +14,6 @@ module.exports.connect = () => mongoose.connect(MONGODB_URL)
 module.exports.disconnect = () => mongoose.disconnect()
 
 module.exports.users = () => mongoose.model('user', {
-	name: String,
+	userName: String,
+	email: String
 })

@@ -35,6 +35,15 @@ app.get('/api/users', (req, res, err) => {
 		.catch(err)
 })
 
+app.get('/api/user/:id', (req, res, err) => {
+	const userId = req.params.id;
+	Users.find( { _id: userId } )
+		.then(user => {
+			res.json( user );
+		})
+		.catch(err)
+})
+
 connect()
 	.then(() => {
 		app.listen(PORT, () => {
