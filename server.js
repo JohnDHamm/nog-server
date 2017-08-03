@@ -42,6 +42,14 @@ app.get('/api/user/:id', (req, res, err) => {
 		.catch(err)
 })
 
+app.get('/api/nogtypes', (req, res, err) => {
+	NogTypes.find()
+		.then(nogTypes => {
+			res.json( nogTypes );
+		})
+		.catch(err)
+})
+
 app.get('/api/userpatterns/:userId', (req, res, err) => {
 	UserPatterns.find( { userId: req.params.userId } )
 		.then(patterns => {
