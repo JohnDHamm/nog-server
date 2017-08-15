@@ -72,6 +72,12 @@ app.get('/api/userpatterns/:userId', (req, res, err) => {
 		.catch(err)
 })
 
+app.patch('/api/userpattern', (req, res, err) => {
+	UserPatterns.findOneAndUpdate({_id: req.body._id}, req.body, { upsert: true, new: true})
+		.then(data => res.json(data))
+		.catch(err)
+})
+
 app.get('/api/m/userpatterns/:query', (req, res, err) => {
 	const query = req.params.query.split(",");
 	UserPatterns.find( { userId: query[0], nogTypeId: query[1] } )
