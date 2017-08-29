@@ -78,6 +78,14 @@ app.patch('/api/userpattern', (req, res, err) => {
 		.catch(err)
 })
 
+app.post('/api/createpattern', (req, res, err) => {
+	UserPatterns.create(req.body)
+		.then(data => {
+			res.json(data)}
+			)
+		.catch(err)
+})
+
 app.get('/api/m/userpatterns/:query', (req, res, err) => {
 	const query = req.params.query.split(",");
 	UserPatterns.find( { userId: query[0], nogTypeId: query[1] } )
