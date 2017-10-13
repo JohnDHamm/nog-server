@@ -67,6 +67,7 @@ app.get('/api/nogtypes', (req, res, err) => {
 app.get('/api/userpatterns/:userId', (req, res, err) => {
 	UserPatterns.find( { userId: req.params.userId } )
 		.sort('name')
+		.select('-instances -customColors')
 		.then(patterns => {
 			res.json( patterns );
 		})
@@ -87,6 +88,8 @@ app.post('/api/createpattern', (req, res, err) => {
 		.catch(err)
 })
 
+// ********** mobile API ****************
+
 app.get('/api/m/userpatterns/:query', (req, res, err) => {
 	const query = req.params.query.split(",");
 	UserPatterns.find( { userId: query[0], nogTypeId: query[1] } )
@@ -95,9 +98,6 @@ app.get('/api/m/userpatterns/:query', (req, res, err) => {
 		})
 		.catch(err)
 })
-
-
-
 
 
 connect()
