@@ -66,6 +66,7 @@ app.get('/api/nogtypes', (req, res, err) => {
 
 app.get('/api/userpatterns/:userId', (req, res, err) => {
 	UserPatterns.find( { userId: req.params.userId } )
+		.sort('name')
 		.then(patterns => {
 			res.json( patterns );
 		})
