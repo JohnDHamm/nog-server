@@ -90,6 +90,7 @@ app.post('/api/createpattern', (req, res, err) => {
 // ********** mobile API ****************
 app.get('/api/m/userpatterns/:userId', (req, res, err) => {
 	UserPatterns.find( { userId: req.params.userId } )
+		.where({published: true})
 		.sort('name')
 		.select('-instances -customColors')
 		.then(patterns => {
