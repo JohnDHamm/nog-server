@@ -99,14 +99,23 @@ app.get('/api/m/userpatterns/:userId', (req, res, err) => {
 		.catch(err)
 })
 
-app.get('/api/m/userpatterns/:query', (req, res, err) => {
-	const query = req.params.query.split(",");
-	UserPatterns.find( { userId: query[0], nogTypeId: query[1] } )
-		.then(patterns => {
-			res.json( patterns );
+app.get('/api/m/userpatterndata/:patternId', (req, res, err) => {
+	UserPatterns.find( {_id: req.params.patternId } )
+		.select('instances')
+		.then(patternData => {
+			res.json( patternData );
 		})
 		.catch(err)
 })
+
+// app.get('/api/m/userpatterns/:query', (req, res, err) => {
+// 	const query = req.params.query.split(",");
+// 	UserPatterns.find( { userId: query[0], nogTypeId: query[1] } )
+// 		.then(patterns => {
+// 			res.json( patterns );
+// 		})
+// 		.catch(err)
+// })
 
 
 connect()
